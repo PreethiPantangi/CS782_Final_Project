@@ -31,7 +31,7 @@ class RecommendationAlgorithms:
         if self.datasetDetails == 'MovieLens':
             movieLensDataPreProcessing.process_movie_lens_data('./recommendation/datasets/movielens/ml-1m.zip')
         else:
-            beautyDataPreProcessing.process_amazon_beauty_data()
+            beautyDataPreProcessing.process_amazon_beauty_data('./recommendation/datasets/amazonbeauty/beauty.json.gz')
         algoDetails.get('fn')()
 
 

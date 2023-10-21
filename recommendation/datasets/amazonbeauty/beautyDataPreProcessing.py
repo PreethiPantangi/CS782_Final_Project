@@ -2,8 +2,12 @@ import gzip
 from collections import defaultdict
 from datetime import datetime
 import json
- 
-def process_amazon_beauty_data():
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import os
+
+
+def process_amazon_beauty_data(dataset_path):
     def parse(path):
         g = gzip.open(path, 'r')
         for l in g:
@@ -14,15 +18,14 @@ def process_amazon_beauty_data():
     countP = defaultdict(lambda: 0)
     line = 0
 
-    dataset_name = 'Beauty'
-    f = open('reviews_' + dataset_name + '.txt', 'w')
+    f = open('./recommendation/datasets/amazonbeauty/beauty.txt', 'w')
     userIdMap = dict()
     productIdMap = dict()
 
     userIdCount = 1
     productIdCount = 1
 
-    for l in parse('reviews_' + dataset_name + '.json.gz'):
+    for l in parse(dataset_path):
         line += 1
         if l['reviewerID'] not in userIdMap.keys():
             userIdMap[l['reviewerID']] = userIdCount
@@ -37,13 +40,15 @@ def process_amazon_beauty_data():
         countU[rev] += 1
         countP[asin] += 1
     f.close()
+    ratings = pd.read_csv('./recommendation/datasets/amazonbeauty/beauty.txt', sep=' ', header=None, engine='python')
+    split_test_and_train(ratings)
 
     usermap = dict()
     usernum = 0
     itemmap = dict()
     itemnum = 0
     User = dict()
-    for l in parse('reviews_' + dataset_name + '.json.gz'):
+    for l in parse(dataset_path):
         line += 1
         asin = l['asin']
         rev = l['reviewerID']
@@ -71,6 +76,23 @@ def process_amazon_beauty_data():
         User[userid].sort(key=lambda x: x[0])
 
     print(usernum, itemnum)
+
+
+def split_test_and_train(ratings):
+    train_data, test_data = train_test_split(ratings, test_size=0.2, random_state=42)
+
+    # Create folders if they don't exist
+    folders = ['test', 'validation']
+    for folder in folders:
+        os.makedirs(f'./recommendation/datasets/amazonbeauty/{folder}', exist_ok=True)
+
+    # Write train and test data to corresponding folders
+    train_data.to_csv('./recommendation/datasets/amazonbeauty/test/train.txt', index=False, header=False, sep='\t')
+    test_data.to_csv('./recommendation/datasets/amazonbeauty/test/test.txt', index=False, header=False, sep='\t')
+
+    # Copy train.txt and test.txt to validation folder
+    os.system('cp ./recommendation/datasets/movielens/test/train.txt ./recommendation/datasets/movielens/validation/train.txt')
+    os.system('cp ./recommendation/datasets/movielens/test/test.txt ./recommendation/datasets/movielens/validation/test.txt')
 
 # This is a guard clause that ensures the code is executed only if the script is run directly, 
 # and not when it's imported by another script.
