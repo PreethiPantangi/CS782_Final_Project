@@ -93,10 +93,6 @@ def split_test_and_train(ratings):
     train_data.to_csv('./recommendation/datasets/amazonbeauty/validation/train.txt', index=False, header=False, sep='\t')
     test_data.to_csv('./recommendation/datasets/amazonbeauty/validation/test.txt', index=False, header=False, sep='\t')
 
-    # Copy train.txt and test.txt to validation folder
-    # os.system('cp ./recommendation/datasets/movielens/test/train.txt ./recommendation/datasets/movielens/validation/train.txt')
-    # os.system('cp ./recommendation/datasets/movielens/test/test.txt ./recommendation/datasets/movielens/validation/test.txt')
-
 # This is a guard clause that ensures the code is executed only if the script is run directly, 
 # and not when it's imported by another script.
 if __name__ == "__main__":
