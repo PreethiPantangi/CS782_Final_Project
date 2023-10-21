@@ -4,11 +4,11 @@ from time import time
 import torch.optim as optim
 from torch.autograd import Variable
 
-from caser import Caser
-from evaluation import evaluate_ranking
-from evaluation import plot_metrics
-from interactions import Interactions
-from utils import *
+from recommendation.algorithms.Ceaser.caser import Caser 
+from recommendation.algorithms.Ceaser.evaluation import evaluate_ranking
+from recommendation.algorithms.Ceaser.evaluation import plot_metrics
+from recommendation.algorithms.Ceaser.interactions import Interactions
+from recommendation.algorithms.Ceaser.utils import *
 
 
 class Recommender(object):
@@ -309,6 +309,7 @@ class Recommender(object):
 
 
 if __name__ == '__main__':
+    print("In __main__")
     parser = argparse.ArgumentParser()
     # data arguments
     parser.add_argument('--train_root', type=str, default='datasets/ml1m/test/train.txt')

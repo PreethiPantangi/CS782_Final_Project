@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="19e79289-fd62-424f-8127-02b4ba5f4c5c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommendation/datasets/amazonbeauty/beautyDataPreProcessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommendation/datasets/amazonbeauty/beautyDataPreProcessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommendation/datasets/movielens/ml-1m/ml-1m/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommendation/datasets/movielens/ml-1m/ml-1m/movies.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommendation/datasets/movielens/ml-1m/ml-1m/ratings.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommendation/datasets/movielens/ml-1m/ml-1m/users.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommendation/datasets/movielens/movieLens.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommendation/datasets/movielens/movieLensDataPreProcessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommendation/datasets/movielens/movieLensDataPreProcessing.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2X2oEVRwXyEYe34nnD3D0MODZPM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="19e79289-fd62-424f-8127-02b4ba5f4c5c" name="Changes" comment="" />
+      <created>1697836423347</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1697836423347</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from utils import activation_getter
+from recommendation.algorithms.Ceaser.utils import activation_getter
 
 
 class Caser(nn.Module):
