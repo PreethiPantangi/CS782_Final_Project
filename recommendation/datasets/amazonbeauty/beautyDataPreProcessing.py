@@ -90,7 +90,6 @@ def split_test_and_train(ratings):
     train_data.to_csv('./recommendation/datasets/amazonbeauty/test/train.txt', index=False, header=False, sep='\t')
     test_data.to_csv('./recommendation/datasets/amazonbeauty/test/test.txt', index=False, header=False, sep='\t')
 
-
     train_data.to_csv('./recommendation/datasets/amazonbeauty/validation/train.txt', index=False, header=False, sep='\t')
     test_data.to_csv('./recommendation/datasets/amazonbeauty/validation/test.txt', index=False, header=False, sep='\t')
 
