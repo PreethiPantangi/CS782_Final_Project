@@ -1,7 +1,9 @@
+import argparse
+
 from recommendation.datasets.movielens import movieLensDataPreProcessing
 from recommendation.datasets.amazonbeauty import beautyDataPreProcessing
-from recommendation.algorithms.Ceaser import train_caser
 from recommendation.algorithms.Ceaser.ceaserAlgo import callCeaser
+from recommendation.algorithms.SasRec.main import SasRec
 
 class RecommendationAlgorithms:
     def __init__(self):
@@ -53,7 +55,13 @@ class RecommendationAlgorithms:
 
     def sasrec(self):
         print("You chose sasrec")
-        print("You chose the dataset - " , self.datasetDetails)
+        SasRec(
+            dataset='ml-1m',
+            train_dir='default',
+            maxlen=200,
+            dropout_rate=0.2,
+            device='cuda'
+        )
 
     def srgnn(self):
         print("You chose srgnn")
