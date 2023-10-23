@@ -12,7 +12,7 @@ def process_movie_lens_data(path):
     ratings_path = "./recommendation/datasets/movielens/ml-1m/ratings.dat"
 
     ratings = pd.read_csv(ratings_path, sep='::', header=None, engine='python')
-    ratings.to_csv('./recommendation/datasets/movielens/movieLens.txt', index=False, header=False, sep='\t')
+    ratings.to_csv('./recommendation/datasets/movielens/movielens.txt', index=False, header=False, sep='\t')
     split_test_and_train(ratings)
 
 def split_test_and_train(ratings):
