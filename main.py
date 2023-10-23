@@ -34,7 +34,7 @@ class RecommendationAlgorithms:
             movieLensDataPreProcessing.process_movie_lens_data('./recommendation/datasets/movielens/ml-1m.zip')
         else:
             beautyDataPreProcessing.process_amazon_beauty_data('./recommendation/datasets/amazonbeauty/beauty.json.gz')
-        algoDetails.get('fn')()
+        algoDetails.get('fn')(self.datasetDetails)
 
 
     def getCorrespondingAlgorithm(self, choice):
@@ -53,10 +53,10 @@ class RecommendationAlgorithms:
         }
         return options.get(choice)
 
-    def sasrec(self):
+    def sasrec(self, datasetName):
         print("You chose sasrec")
         SasRec(
-            dataset='ml-1m',
+            dataset= 'movieLens' if datasetName == 'MovieLens' else 'beauty',
             train_dir='default',
             maxlen=200,
             dropout_rate=0.2,

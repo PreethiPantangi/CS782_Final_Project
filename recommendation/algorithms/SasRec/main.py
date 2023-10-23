@@ -36,7 +36,7 @@ def SasRec(dataset, train_dir, maxlen, dropout_rate, device):
             f.write(f"{k}: {v}\n")
     f.close()
 
-    dataset = data_partition('movieLens')
+    dataset = data_partition(args['dataset'])
     [user_train, user_valid, user_test, usernum, itemnum] = dataset
     num_batch = len(user_train) // args['batch_size'] # tail? + ((len(user_train) % args.batch_size) != 0)
     cc = 0.0
