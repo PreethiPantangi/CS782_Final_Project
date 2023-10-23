@@ -29,34 +29,34 @@ class SASRec(torch.nn.Module):
 
         self.user_num = user_num
         self.item_num = item_num
-        self.dev = args.device
+        self.dev = args['device']
 
         # TODO: loss += args.l2_emb for regularizing embedding vectors during training
         # https://stackoverflow.com/questions/42704283/adding-l1-l2-regularization-in-pytorch
-        self.item_emb = torch.nn.Embedding(self.item_num+1, args.hidden_units, padding_idx=0)
-        self.pos_emb = torch.nn.Embedding(args.maxlen, args.hidden_units) # TO IMPROVE
-        self.emb_dropout = torch.nn.Dropout(p=args.dropout_rate)
+        self.item_emb = torch.nn.Embedding(self.item_num+1, args['hidden_units'], padding_idx=0)
+        self.pos_emb = torch.nn.Embedding(args['maxlen'], args['hidden_units']) # TO IMPROVE
+        self.emb_dropout = torch.nn.Dropout(p=args['dropout_rate'])
 
         self.attention_layernorms = torch.nn.ModuleList() # to be Q for self-attention
         self.attention_layers = torch.nn.ModuleList()
         self.forward_layernorms = torch.nn.ModuleList()
         self.forward_layers = torch.nn.ModuleList()
 
-        self.last_layernorm = torch.nn.LayerNorm(args.hidden_units, eps=1e-8)
+        self.last_layernorm = torch.nn.LayerNorm(args['hidden_units'], eps=1e-8)
 
-        for _ in range(args.num_blocks):
-            new_attn_layernorm = torch.nn.LayerNorm(args.hidden_units, eps=1e-8)
+        for _ in range(args['num_blocks']):
+            new_attn_layernorm = torch.nn.LayerNorm(args['hidden_units'], eps=1e-8)
             self.attention_layernorms.append(new_attn_layernorm)
 
-            new_attn_layer =  torch.nn.MultiheadAttention(args.hidden_units,
-                                                            args.num_heads,
-                                                            args.dropout_rate)
+            new_attn_layer =  torch.nn.MultiheadAttention(args['hidden_units'],
+                                                            args['num_heads'],
+                                                            args['dropout_rate'])
             self.attention_layers.append(new_attn_layer)
 
-            new_fwd_layernorm = torch.nn.LayerNorm(args.hidden_units, eps=1e-8)
+            new_fwd_layernorm = torch.nn.LayerNorm(args['hidden_units'], eps=1e-8)
             self.forward_layernorms.append(new_fwd_layernorm)
 
-            new_fwd_layer = PointWiseFeedForward(args.hidden_units, args.dropout_rate)
+            new_fwd_layer = PointWiseFeedForward(args['hidden_units'], args['dropout_rate'])
             self.forward_layers.append(new_fwd_layer)
 
             # self.pos_sigmoid = torch.nn.Sigmoid()

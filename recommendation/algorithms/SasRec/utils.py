@@ -122,8 +122,8 @@ def evaluate(model, dataset, args):
 
         if len(train[u]) < 1 or len(test[u]) < 1: continue
 
-        seq = np.zeros([args.maxlen], dtype=np.int32)
-        idx = args.maxlen - 1
+        seq = np.zeros([args['maxlen']], dtype=np.int32)
+        idx = args['maxlen'] - 1
         seq[idx] = valid[u][0]
         idx -= 1
         for i in reversed(train[u]):
@@ -169,8 +169,8 @@ def evaluate_valid(model, dataset, args):
     for u in users:
         if len(train[u]) < 1 or len(valid[u]) < 1: continue
 
-        seq = np.zeros([args.maxlen], dtype=np.int32)
-        idx = args.maxlen - 1
+        seq = np.zeros([args['maxlen']], dtype=np.int32)
+        idx = args['maxlen'] - 1
         for i in reversed(train[u]):
             seq[idx] = i
             idx -= 1
