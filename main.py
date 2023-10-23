@@ -2,7 +2,6 @@ from recommendation.datasets.movielens import movieLensDataPreProcessing
 from recommendation.datasets.beauty import beautyDataPreProcessing
 from recommendation.algorithms.Ceaser.ceaserAlgo import callCeaser
 from recommendation.algorithms.SasRec.main import SasRec
-from recommendation.algorithms.SRGNN.main import main
 
 class RecommendationAlgorithms:
     def __init__(self):
