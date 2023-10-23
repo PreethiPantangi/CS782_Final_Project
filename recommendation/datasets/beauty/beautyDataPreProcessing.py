@@ -18,7 +18,7 @@ def process_amazon_beauty_data(dataset_path):
     countP = defaultdict(lambda: 0)
     line = 0
 
-    f = open('./recommendation/datasets/amazonbeauty/beauty.txt', 'w')
+    f = open('./recommendation/datasets/beauty/beauty.txt', 'w')
     userIdMap = dict()
     productIdMap = dict()
 
@@ -40,7 +40,7 @@ def process_amazon_beauty_data(dataset_path):
         countU[rev] += 1
         countP[asin] += 1
     f.close()
-    ratings = pd.read_csv('./recommendation/datasets/amazonbeauty/beauty.txt', sep=' ', header=None, engine='python')
+    ratings = pd.read_csv('./recommendation/datasets/beauty/beauty.txt', sep=' ', header=None, engine='python')
     split_test_and_train(ratings)
 
     usermap = dict()
@@ -84,14 +84,14 @@ def split_test_and_train(ratings):
     # Create folders if they don't exist
     folders = ['test', 'validation']
     for folder in folders:
-        os.makedirs(f'./recommendation/datasets/amazonbeauty/{folder}', exist_ok=True)
+        os.makedirs(f'./recommendation/datasets/beauty/{folder}', exist_ok=True)
 
     # Write train and test data to corresponding folders
-    train_data.to_csv('./recommendation/datasets/amazonbeauty/test/train.txt', index=False, header=False, sep='\t')
-    test_data.to_csv('./recommendation/datasets/amazonbeauty/test/test.txt', index=False, header=False, sep='\t')
+    train_data.to_csv('./recommendation/datasets/beauty/test/train.txt', index=False, header=False, sep='\t')
+    test_data.to_csv('./recommendation/datasets/beauty/test/test.txt', index=False, header=False, sep='\t')
 
-    train_data.to_csv('./recommendation/datasets/amazonbeauty/validation/train.txt', index=False, header=False, sep='\t')
-    test_data.to_csv('./recommendation/datasets/amazonbeauty/validation/test.txt', index=False, header=False, sep='\t')
+    train_data.to_csv('./recommendation/datasets/beauty/validation/train.txt', index=False, header=False, sep='\t')
+    test_data.to_csv('./recommendation/datasets/beauty/validation/test.txt', index=False, header=False, sep='\t')
 
 # This is a guard clause that ensures the code is executed only if the script is run directly, 
 # and not when it's imported by another script.

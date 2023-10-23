@@ -1,9 +1,8 @@
-import argparse
-
 from recommendation.datasets.movielens import movieLensDataPreProcessing
-from recommendation.datasets.amazonbeauty import beautyDataPreProcessing
+from recommendation.datasets.beauty import beautyDataPreProcessing
 from recommendation.algorithms.Ceaser.ceaserAlgo import callCeaser
 from recommendation.algorithms.SasRec.main import SasRec
+from recommendation.algorithms.SRGNN.main import main
 
 class RecommendationAlgorithms:
     def __init__(self):
@@ -33,7 +32,7 @@ class RecommendationAlgorithms:
         if self.datasetDetails == 'MovieLens':
             movieLensDataPreProcessing.process_movie_lens_data('./recommendation/datasets/movielens/ml-1m.zip')
         else:
-            beautyDataPreProcessing.process_amazon_beauty_data('./recommendation/datasets/amazonbeauty/beauty.json.gz')
+            beautyDataPreProcessing.process_amazon_beauty_data('./recommendation/datasets/beauty/beauty.json.gz')
         algoDetails.get('fn')(self.datasetDetails)
 
 
@@ -56,16 +55,17 @@ class RecommendationAlgorithms:
     def sasrec(self, datasetName):
         print("You chose sasrec")
         SasRec(
-            dataset= 'movieLens' if datasetName == 'MovieLens' else 'beauty',
+            dataset= 'movielens' if datasetName == 'MovieLens' else 'beauty',
             train_dir='default',
             maxlen=200,
             dropout_rate=0.2,
             device='cuda'
         )
 
-    def srgnn(self):
+    def srgnn(self, datasetName):
         print("You chose srgnn")
         print("You chose the dataset - " , self.datasetDetails)
+        main(dataset = 'movielens' if datasetName == 'MovieLens' else 'beauty',)
 
     def ceaser(self):
         print("You chose ceaser")
