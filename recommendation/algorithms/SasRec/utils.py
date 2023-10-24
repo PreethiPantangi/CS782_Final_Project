@@ -81,7 +81,7 @@ def data_partition(fname):
     user_valid = {}
     user_test = {}
     # assume user/item index starting from 1
-    f = open('./recommendation/datasets/movielens/%s.txt' % fname, 'r')
+    f = open('./recommendation/datasets/' + fname + '/' + fname +'.txt','r')
     for line in f:
         # print(line.rstrip().split('\t'))
         u, i, __, ___ = line.rstrip().split('\t')

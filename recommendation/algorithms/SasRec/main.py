@@ -16,7 +16,7 @@ def SasRec(dataset, train_dir, maxlen, dropout_rate, device):
         'maxlen':maxlen,
         'hidden_units': 50,
         'num_blocks': 2,
-        'num_epochs': 201,
+        'num_epochs': 20,
         'num_heads': 1,
         'dropout_rate': dropout_rate,
         'l2_emb': 0.0,
