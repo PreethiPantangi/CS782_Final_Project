@@ -39,6 +39,7 @@ def SasRec(dataset, train_dir, maxlen, dropout_rate, device):
     dataset = data_partition(args['dataset'])
     [user_train, user_valid, user_test, usernum, itemnum] = dataset
     num_batch = len(user_train) // args['batch_size'] # tail? + ((len(user_train) % args.batch_size) != 0)
+    print(args['batch_size'], num_batch)
     cc = 0.0
     for u in user_train:
         cc += len(user_train[u])
@@ -86,6 +87,7 @@ def SasRec(dataset, train_dir, maxlen, dropout_rate, device):
     
     for epoch in range(epoch_start_idx, args['num_epochs'] + 1):
         if args['inference_only']: break # just to decrease identition
+        print('num_batch - ' , num_batch)
         for step in range(num_batch): # tqdm(range(num_batch), total=num_batch, ncols=70, leave=False, unit='b'):
             u, seq, pos, neg = sampler.next_batch() # tuples to ndarray
             u, seq, pos, neg = np.array(u), np.array(seq), np.array(pos), np.array(neg)
@@ -101,23 +103,23 @@ def SasRec(dataset, train_dir, maxlen, dropout_rate, device):
             adam_optimizer.step()
             print("loss in epoch {} iteration {}: {}".format(epoch, step, loss.item())) # expected 0.4~0.6 after init few epochs
     
-        if epoch % 20 == 0:
-            model.eval()
-            t1 = time.time() - t0
-            T += t1
-            print('Evaluating', end='')
-            t_test = evaluate(model, dataset, args)
-            t_valid = evaluate_valid(model, dataset, args)
-            print('epoch:%d, time: %f(s), valid (NDCG@10: %.4f, HR@10: %.4f), test (NDCG@10: %.4f, HR@10: %.4f)'
-                    % (epoch, T, t_valid[0], t_valid[1], t_test[0], t_test[1]))
-    
-            f.write(str(t_valid) + ' ' + str(t_test) + '\n')
-            f.flush()
-            t0 = time.time()
-            model.train()
+            if epoch % 20 == 0 and step % 20 == 0:
+                model.eval()
+                t1 = time.time() - t0
+                T += t1
+                print('Evaluating', end='')
+                t_test = evaluate(model, dataset, args)
+                t_valid = evaluate_valid(model, dataset, args)
+                print('epoch:%d, time: %f(s), valid (NDCG@10: %.4f, HR@10: %.4f), test (NDCG@10: %.4f, HR@10: %.4f)'
+                        % (epoch, T, t_valid[0], t_valid[1], t_test[0], t_test[1]))
+        
+                f.write(str(t_valid) + ' ' + str(t_test) + '\n')
+                f.flush()
+                t0 = time.time()
+                model.train()
     
         if epoch == args['num_epochs']:
-            folder = args['dataset'] + '_' + args['train_dir']
+            folder = 'recommendation/algorithms/SasRec/' + args['dataset'] + '_' + args['train_dir']
             fname = 'SASRec.epoch={}.lr={}.layer={}.head={}.hidden={}.maxlen={}.pth'
             fname = fname.format(args['num_epochs'], args['lr'], args['num_blocks'], args['num_heads'], args['hidden_units'], args['maxlen'])
             torch.save(model.state_dict(), os.path.join(folder, fname))

@@ -83,8 +83,10 @@ def data_partition(fname):
     # assume user/item index starting from 1
     f = open('./recommendation/datasets/' + fname + '/' + fname +'.txt','r')
     for line in f:
-        # print(line.rstrip().split('\t'))
-        u, i, __, ___ = line.rstrip().split('\t')
+        if fname == 'movielens':
+            u, i, __, ___ = line.rstrip().split('\t')
+        else:
+            u, i, __, ___ = line.rstrip().split(' ')
         u = int(u)
         i = int(i)
         usernum = max(u, usernum)
