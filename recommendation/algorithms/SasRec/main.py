@@ -38,7 +38,8 @@ def SasRec(dataset, train_dir, maxlen, dropout_rate, device):
 
     dataset = data_partition(args['dataset'])
     [user_train, user_valid, user_test, usernum, itemnum] = dataset
-    num_batch = len(user_train) // args['batch_size'] # tail? + ((len(user_train) % args.batch_size) != 0)
+    # num_batch = len(user_train) // args['batch_size'] # tail? + ((len(user_train) % args.batch_size) != 0)
+    num_batch = 50
     print(args['batch_size'], num_batch)
     cc = 0.0
     for u in user_train:

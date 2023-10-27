@@ -66,11 +66,11 @@ class RecommendationAlgorithms:
         print("You chose the dataset - " , self.datasetDetails)
         main(dataset = 'movielens' if datasetName == 'MovieLens' else 'beauty',)
 
-    def ceaser(self):
+    def ceaser(self, datasetName):
         print("You chose ceaser")
         callCeaser()
 
-    def bert4rec(self):
+    def bert4rec(self, datasetName):
         print("You chose bert4rec")
         print("You chose the dataset - " , self.datasetDetails)
 
