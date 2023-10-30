@@ -81,6 +81,8 @@ class RecommendationAlgorithms:
         parser = argparse.ArgumentParser()
         parser.add_argument('--template', type=str, default='train_bert')
         parser.add_argument('--dataset_code', type=str, default=datasetTocall)
+        parser.add_argument('--train_negative_sampling_seed', type=int, default=0)
+
         args = parser.parse_args()
         if args.template == 'train_bert':
             train()       
