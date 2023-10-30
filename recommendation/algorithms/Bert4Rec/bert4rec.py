@@ -12,7 +12,7 @@ import os
 from recommendation.algorithms.Bert4Rec.runoptions import args
 
 
-def train(args):
+def train():
     export_root = setup_train(args)
     train_loader, val_loader, test_loader = dataloader_factory(args)
     model = model_factory(args)

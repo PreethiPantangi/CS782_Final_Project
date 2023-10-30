@@ -74,13 +74,16 @@ class RecommendationAlgorithms:
     def bert4rec(self, datasetName):
         print("You chose bert4rec")
         print("You chose the dataset - " , self.datasetDetails)
-        custom_args = {
-            "mode": "train",
-            "template": "train_bert",
-            "dataset_code":'1' if datasetName == 'MovieLens' else '2'
-        }
-        train(custom_args)
+        datasetTocall = '1' if datasetName == 'MovieLens' else '2'
+        import argparse
 
+        # Define an argparse parser to parse command line arguments
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--template', type=str, default='train_bert')
+        parser.add_argument('--dataset_code', type=str, default=datasetTocall)
+        args = parser.parse_args()
+        if args.template == 'train_bert':
+            train()       
 
     def default_case(self):
         print("Invalid option")
