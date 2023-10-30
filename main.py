@@ -3,7 +3,8 @@ from recommendation.datasets.beauty import beautyDataPreProcessing
 from recommendation.algorithms.Ceaser.ceaserAlgo import callCeaser
 from recommendation.algorithms.SasRec.main import SasRec
 from recommendation.algorithms.Bert4Rec.bert4rec import train
-from recommendation.algorithms.Bert4Rec.runoptions import args
+from recommendation.algorithms.Bert4Rec.runoptions import args as runoptions_args
+from recommendation.algorithms.Bert4Rec.templates import set_template
 
 class RecommendationAlgorithms:
     def __init__(self):
@@ -76,14 +77,18 @@ class RecommendationAlgorithms:
         print("You chose bert4rec")
         print("You chose the dataset - " , self.datasetDetails)
         datasetTocall = '1' if datasetName == 'MovieLens' else '2'
+        import argparse
 
         # Define an argparse parser to parse command line arguments
-        args.add_argument('--template', type=str, default='train_bert')
-        args.add_argument('--dataset_code', type=str, default=datasetTocall)
-        args.add_argument('--train_negative_sampling_seed', type=int, default=0)
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--template', type=str, default='train_bert')
+        parser.add_argument('--dataset_code', type=str, default=datasetTocall)
+        parser.add_argument('--train_negative_sampling_seed', type=int, default=0)
+        parser.add_argument('--enable_lr_schedule', type=bool, default=True)
 
-        if args.template == 'train_bert':
-            train()       
+        args = parser.parse_args(namespace=runoptions_args)
+        set_template(args)
+        train()      
 
     def default_case(self):
         print("Invalid option")
