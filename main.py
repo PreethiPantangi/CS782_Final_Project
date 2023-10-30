@@ -2,6 +2,7 @@ from recommendation.datasets.movielens import movieLensDataPreProcessing
 from recommendation.datasets.beauty import beautyDataPreProcessing
 from recommendation.algorithms.Ceaser.ceaserAlgo import callCeaser
 from recommendation.algorithms.SasRec.main import SasRec
+from recommendation.algorithms.Bert4Rec.bert4rec import train
 
 class RecommendationAlgorithms:
     def __init__(self):
@@ -73,6 +74,13 @@ class RecommendationAlgorithms:
     def bert4rec(self, datasetName):
         print("You chose bert4rec")
         print("You chose the dataset - " , self.datasetDetails)
+        custom_args = {
+            "mode": "train",
+            "template": "train_bert",
+            "dataset_code":'1' if datasetName == 'MovieLens' else '2'
+        }
+        train(custom_args)
+
 
     def default_case(self):
         print("Invalid option")
